@@ -1,0 +1,29 @@
+/* inter-regular - cyrillic_latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/inter-v12-cyrillic_latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+html {
+    box-sizing: border-box;
+    width: 1000px;
+    height: 647px;
+    background: var(--background, #F7F7F7);
+}
+*, *::before,
+*::after {
+    box-sizing: inherit;
+}
+
+h1 {
+color: #333;
+font-family: Inter;
+font-size: 24px;
+font-style: normal;
+font-weight: 700;
+line-height: 28px;
+margin: 12px 0 0 27px;
+}
