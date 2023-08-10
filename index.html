@@ -8,6 +8,20 @@
     <title>labmedia_test</title>
 </head>
 <body>
-    <h1>Список пользователей</h1>
+    <header class="header">Список пользователей</header>
+    <div class="searchBlock">
+        <label class="wrap">
+            <input type="search" class="search" placeholder="Поиск по имени или e-mail">
+        </label>
+        <button class="clearBotton">
+            <img class="clear" src="./img/clear_icon.svg">
+            <span class="clear_text">Очистить фильтр</span>
+        </button>
+    </div>
+    <div class="sort">
+        <span>Сортировка:</span>
+        <button class="sortDate">Дата регистрации</button>
+        <button class="sortRate">Рейтинг</button>
+    </div>
 </body>
 </html>
