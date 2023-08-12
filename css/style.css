@@ -127,7 +127,7 @@ html {
 .list {
     margin: 15px 0 0 27px;
     width: 961px;
-    height: 384px;
+    height: auto;
     flex-shrink: 0;
     border-radius: 7px;
     background: #FFF;
@@ -176,4 +176,88 @@ html {
     font-weight: 500;
     line-height: 14px;
     margin-left: 150px;
+}
+
+#app {
+    margin: 22px 0 0 16px;
+}
+
+tr {
+    display: flex;
+    width: 927px;
+    height: 30px;
+    margin: 0 0 20px 0;
+}
+
+tr::after {
+    content: "";
+    position: absolute;
+    width: 925px;
+    height: 1px;
+    flex-shrink: 0;
+    background-image: url('../img/strip.svg');
+    stroke-width: 1px;
+}
+
+th_name {
+    display: flex;
+    color: var(--username, #0CB4F1);
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
+    width: 111px;
+    margin-top: 14px;
+}
+
+th_email {
+    display: flex;
+    color: var(--names-tablet, #9EAAB4);
+    font-family: Inter;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14px;
+    margin-left: 139px;
+    width: 156px;
+    margin-top: 14px;
+}
+
+th_date {
+    display: flex;
+    color: var(--names-tablet, #9EAAB4);
+    font-family: Inter;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14px;
+    margin-left: 96px;
+    width: 134px;
+    margin-top: 14px;
+}
+
+th_rate {
+    display: flex;
+    color: var(--names-tablet, #9EAAB4);
+    font-family: Inter;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14px;
+    margin-left: 111px;
+    margin-top: 14px;
+    width: 21px;
+}
+
+#cancel {
+    display: flex;
+    width: 16.017px;
+    height: 16px;
+    padding: 2.667px 2.67px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    margin-top: 14px;
+    margin-left: 122.15px;
 }
