@@ -2,7 +2,9 @@
 
 let copyArrayUser = [],
     sortColumnFlag = '',
-    sortDirFlag = true;
+    sortDirFlag = true,
+    sortDirFlagDate = null,
+    sortDirFlagRate = null;
 
 let searchVal = document.getElementById('searchValue').value;
 
@@ -46,7 +48,7 @@ function render(copyArrayUser){
     if (searchVal!=='') searchFilterArray = search(copyArrayUser, searchVal)
 
     searchFilterArray = searchFilterArray.sort(function(a, b) {
-        let sort = a[sortColumnFlag] < b[sortColumnFlag]
+        let sort = a[sortColumnFlag] < b[sortColumnFlag]; 
         if (sortDirFlag == false) sort = a[sortColumnFlag] > b[sortColumnFlag]
         return sort ? -1 : 1
     })
@@ -142,25 +144,31 @@ document.getElementById('searchValue').addEventListener('keyup', function(event)
 // Клики сортировки
 document.getElementById('sortDateBtn').addEventListener('click', function() {
     sortColumnFlag = 'registration_date';
+    if (sortDirFlagDate == null) sortDirFlagDate = true
+    sortDirFlagRate = null;
 
     element.style.color = '#333';
     elementOther.style.color = '#9EAAB4';
     clearBtn.style.display = 'flex';
     searchBlock.style.height = '102px';
 
-    sortDirFlag = !sortDirFlag;
+    sortDirFlagDate = !sortDirFlagDate;
+    sortDirFlag = sortDirFlagDate;
     render(copyArrayUser)
 });
 
 document.getElementById('sortRateBtn').addEventListener('click', function() {
     sortColumnFlag = 'rating';
+    if (sortDirFlagRate == null) sortDirFlagRate = true
+    sortDirFlagDate = null;
 
     elementOther.style.color = '#333';
     element.style.color = '#9EAAB4';
     clearBtn.style.display = 'flex';
     searchBlock.style.height = '102px';
 
-    sortDirFlag = !sortDirFlag;
+    sortDirFlagRate = !sortDirFlagRate;
+    sortDirFlag = sortDirFlagRate;
     render(copyArrayUser);
 });
 
