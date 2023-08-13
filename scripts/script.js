@@ -1,6 +1,8 @@
 'use strict';
 
-let copyArrayUser = [];
+let copyArrayUser = [],
+    sortColumnFlag = '',
+    sortDirFlag = true;
 
 // Создание элементов
 const $app = document.getElementById('app'),
@@ -36,6 +38,12 @@ function render(copyArrayUser){
 
     const searchVal = document.getElementById('searchValue').value;
     if (searchVal!=='') searchFilterArray = search(copyArrayUser, searchVal)
+
+    searchFilterArray = searchFilterArray.sort(function(a, b) {
+        let sort = a[sortColumnFlag] < b[sortColumnFlag]
+        if (sortDirFlag == false) sort = a[sortColumnFlag] > b[sortColumnFlag]
+        return sort ? -1 : 1
+    })
 
     for (const oneUser of searchFilterArray) {
         let $newTr = createUserTr(oneUser);
@@ -103,10 +111,6 @@ function dateFormat(anyDate) {
 
 }
 
-function fSortDate() {
-
-}
-
 function search(copyArrayUser, value) {
     let result = [],
     copy = [...copyArrayUser];
@@ -122,4 +126,25 @@ document.getElementById('searchValue').addEventListener('keyup', function(event)
     if (event.key === 'Enter') {
         render(copyArrayUser);
     }
+});
+
+// Клики сортировки
+document.getElementById('sortDateBtn').addEventListener('click', function() {
+    sortColumnFlag = 'registration_date';
+    let element = document.querySelector('.underlineDate');
+    let elementOther = document.querySelector('.underlineRate');
+    element.style.color = '#333';
+    elementOther.style.color = '#9EAAB4';
+    sortDirFlag = !sortDirFlag;
+    render(copyArrayUser)
+});
+
+document.getElementById('sortRateBtn').addEventListener('click', function() {
+    sortColumnFlag = 'rating';
+    let element = document.querySelector('.underlineRate');
+    let elementOther = document.querySelector('.underlineDate');
+    element.style.color = '#333';
+    elementOther.style.color = '#9EAAB4';
+    sortDirFlag = !sortDirFlag;
+    render(copyArrayUser);
 });
