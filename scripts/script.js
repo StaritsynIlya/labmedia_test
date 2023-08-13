@@ -1,5 +1,7 @@
 'use strict';
 
+let copyArrayUser = [];
+
 // Создание элементов
 const $app = document.getElementById('app'),
 $table = document.createElement('table'),
@@ -19,22 +21,30 @@ async function getData() {
 
     arrayUser = data;
 
-    render(arrayUser);
+    updateData(arrayUser);
 }
 
-function render(arrayUser){
+function updateData(arrayUser) {
+    copyArrayUser = [...arrayUser];
+    render(copyArrayUser);
+}
+
+// Рендер для вывода всех пользователей
+function render(copyArrayUser){
     $tableBody.innerHTML = '';
-    let copyArrayUser = [...arrayUser];
+    let searchFilterArray = [...copyArrayUser];
 
-    for (const oneUser of copyArrayUser) {
-        let $newTr = createUserTr(oneUser, copyArrayUser);
+    const searchVal = document.getElementById('searchValue').value;
+    if (searchVal!=='') searchFilterArray = search(copyArrayUser, searchVal)
 
+    for (const oneUser of searchFilterArray) {
+        let $newTr = createUserTr(oneUser);
         $tableBody.append($newTr);
     }
 }
 
 // Создание одного пользователя
-function createUserTr(oneUser, copyArrayUser) {
+function createUserTr(oneUser) {
     const cancel = new Image();
     cancel.src = 'img/icon_cancel.svg';
     cancel.id = 'cancel';
@@ -96,3 +106,20 @@ function dateFormat(anyDate) {
 function fSortDate() {
 
 }
+
+function search(copyArrayUser, value) {
+    let result = [],
+    copy = [...copyArrayUser];
+    for (const item of copy) {
+        if ((item.username.toLowerCase()).includes(value.toLowerCase()) == true || (item.email.toLowerCase()).includes(value.toLowerCase()) == true) result.push(item)
+    }
+    return result; 
+}
+
+// Поиск по имени и емэйл
+document.getElementById('searchValue').addEventListener('keyup', function(event) {
+    event.preventDefault();
+    if (event.key === 'Enter') {
+        render(copyArrayUser);
+    }
+});
