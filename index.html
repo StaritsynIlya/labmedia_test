@@ -21,7 +21,7 @@
     </div>
     <div class="sort">
         <span>Сортировка:</span>
-        <button class="sort sortDate"> <span class="underline">Дата регистрации</span></button>
+        <button class="sort sortDate" onclick="fSortDate()"> <span class="underline">Дата регистрации</span></button>
         <button class="sort sortRate"> <span class="underline">Рейтинг<span> </button>
     </div>
     <div class="list">
@@ -33,6 +33,15 @@
         </div>
         <div id="app">
 
+        </div>
+    </div>
+    <div class="modal" id="modal_one">
+        <div class="modal__box">
+            <p id="question">Вы уверены, что хотите удалить пользователя?</p>
+            <div class="yes_no">
+                <button id="YesDelete">Да</button>
+                <button id="closeModalButton">Нет</button>
+            </div>
         </div>
     </div>
     <script src="./scripts/script.js"></script>

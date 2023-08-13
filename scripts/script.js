@@ -1,61 +1,79 @@
 'use strict';
 
+// Создание элементов
+const $app = document.getElementById('app'),
+$table = document.createElement('table'),
+$tableBody = document.createElement('tbody');
+
+$table.append($tableBody);
+$app.append($table);
+
 getData();
 
-// Получение данных с помощью GET-запроса
+// Получение данных с помощью GET-запроса и передачей их при обновлении страницы
 async function getData() {
-    // Создание пустого массива для хранения данных
     let arrayUser = [];
 
-    // Получение данных с помощью GET-запроса
     let response = await fetch('https://5ebbb8e5f2cfeb001697d05c.mockapi.io/users');
     let data = await response.json();
 
-    // Сохранение данных в массиве
     arrayUser = data;
-    // Обновление страницы с новыми данными
-    updatePage(arrayUser);
+
+    render(arrayUser);
 }
 
-function updatePage(arrayUser) {
-    let $app = document.getElementById('app'),
-    $table = document.createElement('table'),
-    $tableBody = document.createElement('tbody');
+function render(arrayUser){
+    $tableBody.innerHTML = '';
+    let copyArrayUser = [...arrayUser];
 
-    $table.append($tableBody);
-    $app.append($table)
+    for (const oneUser of copyArrayUser) {
+        let $newTr = createUserTr(oneUser, copyArrayUser);
 
-    for (const oneUser of arrayUser) {
-        var cancel = new Image();
-        cancel.src = 'img/icon_cancel.svg';
-        cancel.id = 'cancel';
-
-        const $userTr = document.createElement('tr'),
-              $userName = document.createElement('th_name'),
-              $userEmail = document.createElement('th_email'),
-              $userDate = document.createElement('th_date'),
-              $userRate = document.createElement('th_rate');
-
-        $userName.textContent = oneUser.username;
-        $userEmail.textContent = oneUser.email;
-        $userDate.textContent = dateFormat(oneUser.registration_date);
-        $userRate.textContent = oneUser.rating;
-
-        $userTr.append($userName);
-        $userTr.append($userEmail);
-        $userTr.append($userDate);
-        $userTr.append($userRate);
-        $userTr.append(cancel);
-
-        $tableBody.append($userTr);
-
-        cancel.addEventListener('click', function() {
-            console.log('Icon clicked!');
-        });
-        // document.querySelector('tr').appendChild(cancel);
+        $tableBody.append($newTr);
     }
 }
 
+// Создание одного пользователя
+function createUserTr(oneUser, copyArrayUser) {
+    const cancel = new Image();
+    cancel.src = 'img/icon_cancel.svg';
+    cancel.id = 'cancel';
+    const $userTr = document.createElement('tr'),
+          $userName = document.createElement('th_name'),
+          $userEmail = document.createElement('th_email'),
+          $userDate = document.createElement('th_date'),
+          $userRate = document.createElement('th_rate');
+
+    $userName.textContent = oneUser.username;
+    $userEmail.textContent = oneUser.email;
+    $userDate.textContent = dateFormat(oneUser.registration_date);
+    $userRate.textContent = oneUser.rating;
+
+    $userTr.append($userName);
+    $userTr.append($userEmail);
+    $userTr.append($userDate);
+    $userTr.append($userRate);
+    $userTr.append(cancel);
+
+    // Вывод модального окна
+    cancel.addEventListener('click', function() {
+        document.getElementById("modal_one").classList.add("open");
+        // Удаление пользователя
+        document.getElementById("YesDelete").addEventListener('click', function() {
+            copyArrayUser = copyArrayUser.filter(item => item.id !== oneUser.id);
+            $userTr.remove();
+            document.getElementById("modal_one").classList.remove("open");
+        });
+    });
+    // Отмена удаления пользователя
+    document.getElementById("closeModalButton").addEventListener('click', function() {
+        document.getElementById("modal_one").classList.remove("open"); 
+    });
+
+    return $userTr
+}
+
+// Функция приведения даты в нужный вид для вывода
 function dateFormat(anyDate) {
     let date = new Date(anyDate);
     // Получение дня, месяца и года
@@ -75,6 +93,6 @@ function dateFormat(anyDate) {
 
 }
 
-function createStrip() {
+function fSortDate() {
 
 }
