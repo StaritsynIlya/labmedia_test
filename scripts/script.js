@@ -4,6 +4,13 @@ let copyArrayUser = [],
     sortColumnFlag = '',
     sortDirFlag = true;
 
+let searchVal = document.getElementById('searchValue').value;
+
+let element = document.querySelector('.underlineDate'),
+    elementOther = document.querySelector('.underlineRate'),
+    clearBtn = document.querySelector('.clearButton'),
+    searchBlock = document.querySelector('.searchBlock');
+
 // Создание элементов
 const $app = document.getElementById('app'),
 $table = document.createElement('table'),
@@ -36,7 +43,6 @@ function render(copyArrayUser){
     $tableBody.innerHTML = '';
     let searchFilterArray = [...copyArrayUser];
 
-    const searchVal = document.getElementById('searchValue').value;
     if (searchVal!=='') searchFilterArray = search(copyArrayUser, searchVal)
 
     searchFilterArray = searchFilterArray.sort(function(a, b) {
@@ -124,6 +130,11 @@ function search(copyArrayUser, value) {
 document.getElementById('searchValue').addEventListener('keyup', function(event) {
     event.preventDefault();
     if (event.key === 'Enter') {
+        searchVal = document.getElementById('searchValue').value;
+
+        clearBtn.style.display = 'flex';
+        searchBlock.style.height = '102px';
+
         render(copyArrayUser);
     }
 });
@@ -131,20 +142,37 @@ document.getElementById('searchValue').addEventListener('keyup', function(event)
 // Клики сортировки
 document.getElementById('sortDateBtn').addEventListener('click', function() {
     sortColumnFlag = 'registration_date';
-    let element = document.querySelector('.underlineDate');
-    let elementOther = document.querySelector('.underlineRate');
+
     element.style.color = '#333';
     elementOther.style.color = '#9EAAB4';
+    clearBtn.style.display = 'flex';
+    searchBlock.style.height = '102px';
+
     sortDirFlag = !sortDirFlag;
     render(copyArrayUser)
 });
 
 document.getElementById('sortRateBtn').addEventListener('click', function() {
     sortColumnFlag = 'rating';
-    let element = document.querySelector('.underlineRate');
-    let elementOther = document.querySelector('.underlineDate');
-    element.style.color = '#333';
-    elementOther.style.color = '#9EAAB4';
+
+    elementOther.style.color = '#333';
+    element.style.color = '#9EAAB4';
+    clearBtn.style.display = 'flex';
+    searchBlock.style.height = '102px';
+
     sortDirFlag = !sortDirFlag;
+    render(copyArrayUser);
+});
+
+// Кнопка очистки
+document.getElementById('clearButtonClk').addEventListener('click', function(){
+    elementOther.style.color = '#9EAAB4';
+    element.style.color = '#9EAAB4';
+    clearBtn.style.display = 'none';
+    searchBlock.style.height = '58px';
+
+    sortColumnFlag = '';
+    searchVal = '';
+    document.getElementById('searchValue').value = '';
     render(copyArrayUser);
 });

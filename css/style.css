@@ -30,7 +30,8 @@ html {
 
 .searchBlock {
     width: 961px;
-    height: 102px;
+    /* height: 102px; */
+    height: 58px;
     flex-shrink: 0;
     border-radius: 7px;
     background: #FFF;
@@ -58,16 +59,17 @@ html {
     border-radius: 4px;
     border: none;
     background: #ECEFF0;
-    padding-left: 31px;
+    padding: 0 0 0 31px;
     margin: 12px 0 0 16px;
 }
 
-.clearBotton {
+.clearButton {
     background: #FFF;
-    margin: 24px 0 0 16px;
+    margin: 24px 0 16px 16px;
     padding: 0px;
     border: none;
-    display: flex;
+    display: none;
+    /* visibility: hidden; */
 }
 
 .clear {
