@@ -154,6 +154,8 @@ document.getElementById('searchValue').addEventListener('keyup', function(event)
 
         clearBtn.style.display = 'flex';
         searchBlock.style.height = '102px';
+        currentPage = 1;
+        pages.textContent = currentPage;
 
         render(copyArrayUser);
     }
