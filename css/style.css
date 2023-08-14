@@ -360,3 +360,58 @@ th_rate {
 .modal.open .modal__box {
     transform: scale(1);
 }
+
+#prev {
+    padding: 6px 36px;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 3px;
+    background: #fff;
+    border: none;
+    box-shadow: 0px 18px 15px 0px rgba(148, 148, 148, 0.15);
+
+    color: #333;
+    font-family: Inter;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14px;
+
+    margin: 15px 0 30px 290px;
+}
+
+.pages {
+    padding: 6px 36px;
+    border-radius: 3px;
+    background-color: #fff;
+    border: none;
+    box-shadow: 0px 18px 15px 0px rgba(148, 148, 148, 0.15);
+
+    color: #333;
+    font-family: Inter;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14px;
+
+    margin: 15px 0 30px 27px;
+}
+
+#next {
+    padding: 6px 36px;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 3px;
+    background: #fff;
+    border: none;
+    box-shadow: 0px 18px 15px 0px rgba(148, 148, 148, 0.15);
+
+    color: #333;
+    font-family: Inter;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14px;
+
+    margin: 15px 0 30px 27px;
+}

@@ -1,17 +1,30 @@
 'use strict';
 
+    // Массив который будем изменять, не трогая основной
 let copyArrayUser = [],
+    searchFilterArray = [],
+    maxPage = 1,
+    // Столбец по которо у будет идти сортировка
     sortColumnFlag = '',
+    // Знак для сортировки
     sortDirFlag = true,
+    // Контроль нажатия на другое поле сортировки
     sortDirFlagDate = null,
     sortDirFlagRate = null;
 
-let searchVal = document.getElementById('searchValue').value;
+    // Количество пользователей на странице
+let perPage = 5;
+    // Текущая страница
+let currentPage = 1;
 
-let element = document.querySelector('.underlineDate'),
+
+    // Получение элементов для наведения красоты
+let searchVal = document.getElementById('searchValue').value,
+    element = document.querySelector('.underlineDate'),
     elementOther = document.querySelector('.underlineRate'),
     clearBtn = document.querySelector('.clearButton'),
-    searchBlock = document.querySelector('.searchBlock');
+    searchBlock = document.querySelector('.searchBlock'),
+    pages = document.querySelector('.pages');
 
 // Создание элементов
 const $app = document.getElementById('app'),
@@ -43,7 +56,7 @@ function updateData(arrayUser) {
 // Рендер для вывода всех пользователей
 function render(copyArrayUser){
     $tableBody.innerHTML = '';
-    let searchFilterArray = [...copyArrayUser];
+    searchFilterArray = [...copyArrayUser];
 
     if (searchVal!=='') searchFilterArray = search(copyArrayUser, searchVal)
 
@@ -52,6 +65,11 @@ function render(copyArrayUser){
         if (sortDirFlag == false) sort = a[sortColumnFlag] > b[sortColumnFlag]
         return sort ? -1 : 1
     })
+    
+    maxPage = Math.ceil(searchFilterArray.length / perPage)
+    let start = (currentPage - 1) * perPage;
+    let end = start + perPage;
+    searchFilterArray = searchFilterArray.slice(start, end);
 
     for (const oneUser of searchFilterArray) {
         let $newTr = createUserTr(oneUser);
@@ -181,6 +199,27 @@ document.getElementById('clearButtonClk').addEventListener('click', function(){
 
     sortColumnFlag = '';
     searchVal = '';
+    sortDirFlag = true;
+    sortDirFlagDate = null;
+    sortDirFlagRate = null;
     document.getElementById('searchValue').value = '';
+
+    searchFilterArray = [...copyArrayUser];
     render(copyArrayUser);
+});
+
+document.querySelector('#prev').addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      pages.textContent = currentPage;
+      render(copyArrayUser);
+    }
+});
+  
+document.querySelector('#next').addEventListener('click', () => {
+    if (currentPage < maxPage) {
+        currentPage++;
+        pages.textContent = currentPage;
+        render(copyArrayUser);
+    }
 });
